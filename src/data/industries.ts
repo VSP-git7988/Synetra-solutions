@@ -1,89 +1,69 @@
-import type { IconName } from "@/lib/icons";
-
 export type Industry = {
   slug: string;
   title: string;
-  shortDescription: string;
-  icon: IconName;
-  heroTagline: string;
+  icon: 'landmark' | 'shopping' | 'heart';
+  summary: string;
   overview: string;
-  challenges: { title: string; description: string }[];
-  howWeHelp: { title: string; description: string }[];
-  relevantServices: string[];
+  points: string[];
+  hasDetail?: boolean;
+  detail?: {
+    tagline: string;
+    intro: string[];
+    challenges: { title: string; text: string }[];
+    help: { title: string; text: string; service: string }[];
+    services: string[];
+  };
 };
 
 export const industries: Industry[] = [
   {
-    slug: "financial-services",
-    title: "Financial Services",
-    shortDescription:
-      "Data, AI and specialist talent for banks, insurers, asset managers and fintechs navigating rapid change.",
-    icon: "Landmark",
-    heroTagline: "Modernize with confidence in a highly regulated world.",
+    slug: 'financial-services',
+    title: 'Financial Services',
+    icon: 'landmark',
+    summary: 'Secure, compliant technology for banks, lenders, insurers and fintechs.',
     overview:
-      "Financial institutions are under pressure to modernize legacy systems, adopt AI responsibly and meet rising regulatory expectations, all while protecting margins and customer trust. Synetra brings the data foundations, delivery capability and specialist talent to do all three at once.",
-    challenges: [
-      { title: "Legacy complexity", description: "Core platforms and siloed data slow product launches and reporting." },
-      { title: "Regulatory pressure", description: "Evolving rules demand traceable data, explainable models and strong controls." },
-      { title: "Scarce specialist talent", description: "Competition for data, risk and AI professionals is intense." },
-      { title: "Rising customer expectations", description: "Clients expect personalized, digital-first experiences at every touchpoint." },
-    ],
-    howWeHelp: [
-      { title: "Responsible AI for risk and operations", description: "Fraud detection, credit decisioning and service automation with governance built in." },
-      { title: "Trusted regulatory data", description: "Governed data lineage and quality controls that simplify reporting and audits." },
-      { title: "Specialist hiring at speed", description: "Pre-vetted risk, compliance, data and technology professionals." },
-      { title: "Transformation delivery", description: "Experienced program leaders for core modernization and cloud migration." },
-    ],
-    relevantServices: ["ai-solutions", "data-intelligence", "executive-search", "project-solutions"],
+      'Financial institutions are asked to move faster while carrying more regulation and more risk than almost any other sector. We help them modernise core systems, put AI to work on fraud and risk, and hire the specialists who are hardest to find.',
+    points: ['AI-driven fraud and anomaly detection', 'Legacy core modernisation and cloud migration', 'Compliance-ready data and reporting'],
+    hasDetail: true,
+    detail: {
+      tagline: 'Modernise with confidence: secure technology, trusted data and specialist talent for regulated finance.',
+      intro: [
+        'Banks, lenders, insurers and fintechs face the same squeeze: customers expect digital speed, regulators expect complete control, and the systems underneath were often built decades ago.',
+        'Synetra helps financial organisations move forward without adding risk. We combine AI, cloud and data expertise with deep knowledge of compliance-heavy environments, and we can staff the specialist roles your programmes depend on.',
+      ],
+      challenges: [
+        { title: 'Fraud and financial risk', text: 'Attack patterns change faster than rule-based systems can keep up.' },
+        { title: 'Regulatory pressure', text: 'Reporting, audit trails and data privacy demands keep growing.' },
+        { title: 'Legacy core systems', text: 'Ageing platforms slow product launches and raise running costs.' },
+        { title: 'Scarce specialist talent', text: 'Cloud, data and AI engineers with finance experience are hard to hire.' },
+      ],
+      help: [
+        { title: 'AI for fraud and risk', text: 'Models that score transactions in real time and send analysts the alerts that matter.', service: 'ai-solutions' },
+        { title: 'Core modernisation and cloud', text: 'Phased migration of legacy workloads to secure, compliant AWS or Azure environments.', service: 'project-solutions' },
+        { title: 'Governed, audit-ready data', text: 'Data quality, lineage and reporting that stand up to regulatory review.', service: 'data-intelligence' },
+        { title: 'Specialist finance IT talent', text: 'Pre-screened engineers, architects and leaders who know regulated environments.', service: 'staffing-solutions' },
+      ],
+      services: ['ai-solutions', 'project-solutions', 'data-intelligence', 'staffing-solutions'],
+    },
   },
   {
-    slug: "consumer-retail",
-    title: "Consumer & Retail",
-    shortDescription:
-      "Customer insight, supply chain intelligence and flexible talent for brands that move at the speed of the shopper.",
-    icon: "ShoppingBag",
-    heroTagline: "Know your customer, sharpen your operations, grow with agility.",
+    slug: 'consumer-retail',
+    title: 'Consumer & Retail',
+    icon: 'shopping',
+    summary: 'Data, AI and talent that help brands know their customers and move with demand.',
     overview:
-      "Consumer and retail businesses compete on relevance, availability and margin. Synetra helps brands and retailers unify customer and product data, apply AI to demand and pricing decisions, and scale their workforce for every peak and new channel.",
-    challenges: [
-      { title: "Fragmented customer data", description: "Disconnected channels make a single customer view hard to achieve." },
-      { title: "Demand volatility", description: "Shifting preferences and disruption make forecasting and inventory difficult." },
-      { title: "Margin pressure", description: "Rising costs demand smarter pricing, promotion and fulfillment decisions." },
-      { title: "Seasonal workforce needs", description: "Peaks and new store or channel launches require fast, flexible hiring." },
-    ],
-    howWeHelp: [
-      { title: "Unified customer and product data", description: "MDM and analytics that connect every channel into one view." },
-      { title: "AI for demand and pricing", description: "Forecasting and optimization models that reduce stockouts and markdowns." },
-      { title: "Sustainable supply chains", description: "ESG and supplier data management to meet growing transparency demands." },
-      { title: "Scalable talent", description: "Contract and volume hiring that flexes with your trading calendar." },
-    ],
-    relevantServices: ["data-intelligence", "ai-solutions", "staffing-solutions", "environmental-data-science"],
+      'Retail margins are won on knowing customers and getting stock in the right place. We connect commerce, supply chain and customer data, add personalisation and forecasting, and flex your team for seasonal peaks.',
+    points: ['Personalisation and recommendation engines', 'Demand forecasting and unified omnichannel data', 'Scalable teams for seasonal peaks'],
   },
   {
-    slug: "healthcare-life-sciences",
-    title: "Healthcare & Life Sciences",
-    shortDescription:
-      "Secure data, compliant AI and hard-to-find expertise for providers, payers, pharma and medtech.",
-    icon: "HeartPulse",
-    heroTagline: "Better data and better teams for better outcomes.",
+    slug: 'healthcare-life-sciences',
+    title: 'Health Care & Life Sciences',
+    icon: 'heart',
+    summary: 'Privacy-first technology for providers, payers and research organisations.',
     overview:
-      "Healthcare and life sciences organizations hold enormous amounts of valuable data, yet much of it is locked in silos and bound by strict privacy rules. Synetra helps you put that data to work safely, deliver complex programs and attract the clinical, scientific and technical talent you need.",
-    challenges: [
-      { title: "Siloed clinical and operational data", description: "Records, claims and research data rarely connect cleanly." },
-      { title: "Privacy and compliance", description: "HIPAA, GxP and data-protection obligations shape every initiative." },
-      { title: "Workforce shortages", description: "Clinical, scientific and health-tech roles are hard to fill." },
-      { title: "Pressure to innovate", description: "Leaders must adopt AI and digital tools without disrupting care or research." },
-    ],
-    howWeHelp: [
-      { title: "Compliant data foundations", description: "Governed, secure data platforms that respect privacy by design." },
-      { title: "AI with clinical guardrails", description: "Operational and research AI with validation, monitoring and oversight." },
-      { title: "Specialist talent", description: "Health-tech, data, regulatory and leadership talent through search and staffing." },
-      { title: "Program delivery", description: "EHR, data platform and digital health initiatives delivered end to end." },
-    ],
-    relevantServices: ["data-intelligence", "ai-solutions", "staffing-solutions", "project-solutions"],
+      'Health organisations hold some of the most sensitive data there is. We help them use it responsibly, with secure cloud platforms, governed clinical and operational data, analytics for research, and hard-to-find specialist talent.',
+    points: ['Secure, compliant cloud and data platforms', 'Clinical and operational analytics', 'Specialist health IT recruitment'],
   },
 ];
 
-export function getIndustry(slug: string) {
-  return industries.find((i) => i.slug === slug);
-}
+export const industryHref = (i: Industry) => (i.hasDetail ? `/industries/${i.slug}/` : `/industries/#${i.slug}`);
