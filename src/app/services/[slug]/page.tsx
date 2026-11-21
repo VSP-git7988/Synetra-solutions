@@ -6,7 +6,7 @@ import PageHero from '@/components/PageHero';
 import CTA from '@/components/CTA';
 import Reveal from '@/components/Reveal';
 import { Eyebrow, Icon } from '@/components/Brand';
-import { services, serviceHref } from '@/data/services';
+import { services, serviceHref, serviceImage } from '@/data/services';
 import { industries, industryHref } from '@/data/industries';
 
 export function generateStaticParams() {
@@ -52,6 +52,8 @@ export default function ServiceDetail({ params }: { params: { slug: string } }) 
             <Reveal>
               <Eyebrow>Overview</Eyebrow>
               <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">From pilot projects to production results.</h2>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={serviceImage(s)} alt={s.title} className="mt-8 aspect-[16/8] w-full rounded-xl object-cover shadow-md" />
               <div className="mt-6 space-y-5 text-lg leading-relaxed text-synetra-slate">
                 {d.overview.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}
               </div>

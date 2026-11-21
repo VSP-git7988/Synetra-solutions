@@ -32,14 +32,9 @@ export default function IndustriesPage() {
           {industries.map((ind, i) => (
             <Reveal key={ind.slug} delay={i * 90}>
               <article id={ind.slug} className="card flex h-full scroll-mt-28 flex-col overflow-hidden">
-                <div className={`flex aspect-[16/10] items-center justify-center ${i === 1 ? 'bg-brand-gradient' : 'bg-synetra-mist'}`}>
-                  {i === 1 ? (
-                    <div className="grid grid-cols-4 gap-2.5" aria-hidden>
-                      {ART[i].flat().map((c, k) => <span key={k} className={`h-9 w-9 rounded-[5px] ${c === 0 ? '' : c === 1 ? 'bg-white' : c === 2 ? 'bg-white/60' : 'bg-white/30'}`} />)}
-                    </div>
-                  ) : (
-                    <PixelMosaic pattern={ART[i]} size="h-9 w-9" gap="gap-2.5" />
-                  )}
+                <div className="overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`/images/industry-${i + 1}.jpg`} alt={ind.title} className="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-105" />
                 </div>
                 <div className="flex flex-1 flex-col p-8">
                   <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-synetra-mist text-synetra-blue"><Icon name={ind.icon} /></span>

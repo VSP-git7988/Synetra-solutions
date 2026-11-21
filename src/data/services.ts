@@ -2,6 +2,7 @@ export type Service = {
   slug: string;
   title: string;
   icon: 'brain' | 'crown' | 'users' | 'server' | 'database' | 'leaf';
+  image?: string;
   summary: string;
   offerings: string[];
   hasDetail?: boolean;
@@ -97,5 +98,7 @@ export const services: Service[] = [
     offerings: ['Environmental monitoring data', 'ESG & sustainability reporting', 'Geospatial analytics', 'Regulatory compliance data'],
   },
 ];
+
+export const serviceImage = (s: Service) => s.image ?? `/images/service-${s.slug}.jpg`;
 
 export const serviceHref = (s: Service) => (s.hasDetail ? `/services/${s.slug}/` : `/services/#${s.slug}`);

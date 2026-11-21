@@ -11,9 +11,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['Unbounded', 'system-ui', 'sans-serif'],
-        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
-        sans: ['Manrope', 'system-ui', 'sans-serif'],
+        display: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'brand-gradient': 'linear-gradient(120deg, #002561 0%, #0162B6 55%, #0097DF 100%)',

@@ -45,9 +45,9 @@ export default function AboutPage() {
               <p>Today we work with organisations in financial services, retail and health care. We help them adopt AI, move to the cloud, organise their data and build strong technology teams, with consultants who stay accountable from the first conversation to long-term support.</p>
             </div>
           </Reveal>
-          <Reveal delay={120} className="relative flex aspect-square items-center justify-center rounded-[2rem] bg-synetra-mist">
+          <Reveal delay={120}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/synetra-icon.png" alt="" className="w-[62%] opacity-90" />
+            <img src="/images/about-team.jpg" alt="The Synetra Solutions team at work" className="aspect-[4/3] w-full rounded-xl object-cover shadow-lg" />
           </Reveal>
         </div>
       </section>

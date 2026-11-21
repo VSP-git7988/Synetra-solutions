@@ -5,7 +5,7 @@ import PageHero from '@/components/PageHero';
 import CTA from '@/components/CTA';
 import Reveal from '@/components/Reveal';
 import { Eyebrow, Icon, PixelBullet, PixelMosaic } from '@/components/Brand';
-import { services } from '@/data/services';
+import { services, serviceImage } from '@/data/services';
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -54,14 +54,9 @@ export default function ServicesPage() {
                     )}
                   </div>
                 </div>
-                <div className={`flex aspect-[4/3] items-center justify-center rounded-[1.75rem] ${i % 2 ? 'bg-brand-gradient' : 'bg-synetra-mist'}`}>
-                  {i % 2 ? (
-                    <div className="grid grid-cols-4 gap-3" aria-hidden>
-                      {ART[i].flat().map((c, k) => <span key={k} className={`h-11 w-11 rounded-[5px] ${c === 0 ? '' : c === 1 ? 'bg-white' : c === 2 ? 'bg-white/60' : 'bg-white/30'}`} />)}
-                    </div>
-                  ) : (
-                    <PixelMosaic pattern={ART[i]} size="h-11 w-11" gap="gap-3" />
-                  )}
+                <div className="overflow-hidden rounded-xl">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={serviceImage(s)} alt={s.title} className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
                 </div>
               </article>
             </Reveal>

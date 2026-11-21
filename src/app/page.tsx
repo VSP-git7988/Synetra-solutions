@@ -1,145 +1,199 @@
 import Link from 'next/link';
-import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
-import TideShader from '@/components/motion/TideShader';
-import Magnetic from '@/components/motion/Magnetic';
-import ScrubText from '@/components/home/ScrubText';
-import HorizontalServices from '@/components/home/HorizontalServices';
-import VelocityMarquee from '@/components/home/VelocityMarquee';
-import IndustryList from '@/components/home/IndustryList';
-import StackingSteps from '@/components/home/StackingSteps';
-import CountUp from '@/components/home/CountUp';
-import BigCTA from '@/components/BigCTA';
+import { ArrowRight, Award, CheckCircle2, Clock, Headphones, ShieldCheck, Users } from 'lucide-react';
+import HeroSlider from '@/components/HeroSlider';
+import Counter from '@/components/Counter';
+import CTA from '@/components/CTA';
 import Reveal from '@/components/Reveal';
-import { clients, stats } from '@/data/site';
+import { Eyebrow, Icon } from '@/components/Brand';
+import { services, serviceHref } from '@/data/services';
+import { industries, industryHref } from '@/data/industries';
+import { clients, stats, steps } from '@/data/site';
 
-function RotatingBadge() {
-  const text = 'IT CONSULTING • CLOUD • AI • TALENT • ';
-  return (
-    <div className="relative h-32 w-32" aria-hidden>
-      <svg viewBox="0 0 120 120" className="spin-slow h-full w-full">
-        <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
-        <text className="fill-white/80 font-sans text-[10.5px] font-semibold tracking-[0.18em]"><textPath href="#circ">{text}</textPath></text>
-      </svg>
-      <span className="absolute inset-0 m-auto grid h-10 w-10 grid-cols-2 gap-1">
-        <span className="rounded-[3px] bg-synetra-navy ring-1 ring-white/30" /><span className="rounded-[3px] bg-synetra-sky" />
-        <span className="rounded-[3px] bg-synetra-blue" /><span />
-      </span>
-    </div>
-  );
-}
+const features = [
+  { icon: ShieldCheck, title: 'Trusted Expertise', text: 'Experienced consultants across AI, cloud, data and infrastructure.' },
+  { icon: Users, title: 'Skilled IT Talent', text: 'Pre-screened professionals for contract and permanent roles.' },
+  { icon: Clock, title: 'On-Time Delivery', text: 'Clear plans, regular reporting and accountable delivery teams.' },
+];
+
+const why = [
+  { icon: Award, title: 'Proven experience', text: 'Our consultants have planned, built and supported real enterprise systems.' },
+  { icon: Users, title: 'One partner', text: 'Technology delivery and IT staffing from the same team, so nothing gets lost.' },
+  { icon: ShieldCheck, title: 'Security first', text: 'Security, compliance and data governance are built into every engagement.' },
+  { icon: Headphones, title: 'Ongoing support', text: 'We stay with you after go-live to monitor, improve and scale.' },
+];
 
 export default function Home() {
   return (
     <>
-      {/* ================= HERO ================= */}
-      <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-synetra-abyss text-white">
-        <TideShader />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,transparent_55%,rgba(2,10,28,.85))]" />
-        {/* fine grid */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(rgba(255,255,255,.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.6)_1px,transparent_1px)] [background-size:88px_88px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+      <HeroSlider />
 
-        <div className="container-site relative flex flex-1 flex-col justify-end pb-10 pt-40 sm:pb-14">
-          <div className="absolute right-5 top-36 hidden sm:right-8 md:block"><RotatingBadge /></div>
-
-          <p className="mb-8 flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.3em] text-white/70">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-synetra-sky" /> Synetra Solutions LLC · IT consulting partner
-          </p>
-
-          <h1 className="font-display text-[13vw] font-normal leading-[0.92] !text-white sm:text-[10.5vw] lg:text-[8.6rem] xl:text-[9.6rem]" aria-label="Engineering the next era of IT.">
-            <span className="line-mask"><span style={{ animationDelay: '.15s' }}>Engineering</span></span>
-            <span className="line-mask"><span style={{ animationDelay: '.3s' }}>the <span className="serif-i text-glow pr-2 text-[1.12em]">next</span> era</span></span>
-            <span className="line-mask"><span style={{ animationDelay: '.45s' }}>of IT<span className="text-synetra-sky">.</span></span></span>
-          </h1>
-
-          <div className="mt-12 grid items-end gap-8 border-t border-white/15 pt-8 md:grid-cols-[1.2fr_auto_1fr]">
-            <p className="max-w-md text-[17px] leading-relaxed text-white/75">
-              We plan, build and run the AI, cloud and data systems your business depends on, and bring in the IT talent to deliver them.
-            </p>
-            <a href="#manifesto" className="hidden flex-col items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/60 md:flex">
-              Scroll
-              <span className="relative h-14 w-px overflow-hidden bg-white/15"><span className="scroll-line absolute inset-0 bg-synetra-sky" /></span>
-            </a>
-            <div className="flex flex-wrap gap-3 md:justify-end">
-              <Magnetic>
-                <Link href="/contact/" className="btn-white">Start a project <span className="arrow !bg-synetra-navy/10"><ArrowUpRight className="h-4 w-4" /></span></Link>
-              </Magnetic>
-              <Magnetic>
-                <Link href="/services/" className="btn-ghost-light">Our services</Link>
-              </Magnetic>
-            </div>
-          </div>
+      {/* Feature boxes overlapping the slider */}
+      <section className="relative z-20 -mt-14">
+        <div className="container-site grid gap-5 md:grid-cols-3">
+          {features.map((f, i) => (
+            <Reveal key={f.title} delay={i * 80} className="flex gap-5 rounded-xl bg-white p-7 shadow-[0_20px_45px_-20px_rgba(4,34,87,.35)]">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-synetra-mist text-synetra-blue"><f.icon className="h-7 w-7" strokeWidth={1.7} /></span>
+              <div>
+                <h3 className="text-lg font-semibold">{f.title}</h3>
+                <p className="mt-1.5 text-[15px] leading-relaxed text-synetra-slate">{f.text}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      {/* ================= MANIFESTO ================= */}
-      <section id="manifesto" className="relative bg-synetra-paper py-28 sm:py-40">
+      {/* About */}
+      <section className="py-20 sm:py-24">
+        <div className="container-site grid items-center gap-14 lg:grid-cols-2">
+          <Reveal className="relative">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/about.jpg" alt="Synetra Solutions technology consulting" className="w-full rounded-xl object-cover shadow-lg" />
+            <div className="absolute -bottom-6 right-6 rounded-xl bg-synetra-blue px-7 py-5 text-white shadow-xl sm:right-10">
+              <p className="font-display text-4xl font-bold"><Counter value={stats[0].value} /></p>
+              <p className="text-sm text-white/85">{stats[0].label}</p>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <Eyebrow>About Synetra</Eyebrow>
+            <h2 className="section-title">Your trusted partner for IT consulting and technology talent</h2>
+            <p className="mt-5 text-lg leading-relaxed text-synetra-slate">
+              Synetra Solutions LLC helps organisations plan, build and run the technology their business depends on. We bring together experienced consultants and skilled IT professionals so strategy, delivery and people stay connected.
+            </p>
+            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+              {['AI & automation solutions', 'Cloud migration & DevOps', 'Data management & analytics', 'IT staffing & executive search'].map((t) => (
+                <li key={t} className="flex items-center gap-3 font-medium text-synetra-navy"><CheckCircle2 className="h-5 w-5 shrink-0 text-synetra-sky" />{t}</li>
+              ))}
+            </ul>
+            <Link href="/about/" className="btn-primary mt-9">Read More <ArrowRight className="h-4 w-4" /></Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="bg-synetra-mist py-20 sm:py-24">
         <div className="container-site">
-          <span className="eyebrow">( 01 ) Who we are</span>
-          <ScrubText
-            className="mt-10 font-display text-[2rem] leading-[1.15] text-synetra-navy sm:text-5xl lg:text-[4.1rem]"
-            text="Synetra is where *intelligent* technology meets *exceptional* people. One partner to plan it, build it, run it and staff it, from the first workshop to long after go-live."
-          />
-          <div className="mt-24 grid grid-cols-2 gap-y-12 border-t border-synetra-navy/15 pt-12 lg:grid-cols-4">
-            {stats.map((s, i) => (
-              <Reveal key={s.label} delay={i * 80} className={`pr-6 ${i ? 'lg:border-l lg:border-synetra-navy/15 lg:pl-8' : ''}`}>
-                <p className="font-display text-6xl text-synetra-navy sm:text-7xl"><CountUp value={s.value} /></p>
-                <p className="mt-3 max-w-[14rem] text-[15px] text-synetra-slate">{s.label}</p>
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <Eyebrow>Our Services</Eyebrow>
+            <h2 className="section-title">Technology solutions and talent for every stage of growth</h2>
+            <p className="mt-4 text-lg text-synetra-slate">Six service lines that work on their own or together as one programme.</p>
+          </Reveal>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s, i) => (
+              <Reveal key={s.slug} delay={(i % 3) * 80}>
+                <Link href={serviceHref(s)} className="card group flex h-full flex-col overflow-hidden p-8">
+                  <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-synetra-blue transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="flex h-16 w-16 items-center justify-center rounded-lg bg-synetra-mist text-synetra-blue transition-colors group-hover:bg-synetra-blue group-hover:text-white"><Icon name={s.icon} className="h-8 w-8" /></span>
+                  <h3 className="mt-6 text-xl font-semibold">{s.title}</h3>
+                  <p className="mt-3 flex-1 text-[15px] leading-relaxed text-synetra-slate">{s.summary}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold text-synetra-blue">Read More <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+                </Link>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ================= SERVICES (pinned horizontal) ================= */}
-      <HorizontalServices />
-
-      {/* ================= MARQUEE ================= */}
-      <section className="bg-synetra-paper pt-20 sm:pt-28">
-        <VelocityMarquee rows={[['Cloud', 'AI Agents', 'DevOps', 'Data'], ['Talent', 'Security', 'Strategy', 'Scale']]} />
-      </section>
-
-      {/* ================= INDUSTRIES ================= */}
-      <section className="bg-synetra-paper py-20 sm:py-28">
-        <div className="container-site">
-          <div className="mb-14 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-            <div>
-              <span className="eyebrow">( 03 ) Industries</span>
-              <h2 className="mt-5 max-w-3xl text-4xl leading-[1.05] sm:text-6xl">Where the stakes are <span className="serif-i text-gradient">highest.</span></h2>
+      {/* Stats */}
+      <section className="relative overflow-hidden bg-synetra-navy py-16">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/page-banner.jpg" alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="container-site relative grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <p className="font-display text-4xl font-bold text-white sm:text-5xl"><Counter value={s.value} /></p>
+              <p className="mt-2 text-[15px] text-white/75">{s.label}</p>
             </div>
-            <p className="max-w-sm text-synetra-slate">Regulation, customers and data look different in every sector. Our teams bring that context with them from day one.</p>
-          </div>
-          <IndustryList />
+          ))}
         </div>
       </section>
 
-      {/* ================= PROCESS (stacking) ================= */}
-      <section className="bg-synetra-mist py-24 sm:py-32">
-        <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.6fr]">
-          <div className="lg:sticky lg:top-32 lg:self-start">
-            <span className="eyebrow">( 04 ) How we engage</span>
-            <h2 className="mt-5 text-4xl leading-[1.05] sm:text-6xl">From first call to <span className="serif-i text-gradient">lasting</span> results.</h2>
-            <p className="mt-6 max-w-sm text-lg text-synetra-slate">The same disciplined rhythm whether you need one expert or an entire delivery team.</p>
-            <Link href="/contact/" className="mt-8 inline-flex items-center gap-2 font-semibold text-synetra-blue">Plan your engagement <ArrowDownRight className="h-4 w-4 -rotate-90" /></Link>
+      {/* Industries */}
+      <section className="py-20 sm:py-24">
+        <div className="container-site">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <Reveal className="max-w-2xl">
+              <Eyebrow>Industries We Serve</Eyebrow>
+              <h2 className="section-title">Sector experience you can rely on</h2>
+            </Reveal>
+            <Reveal delay={100}><Link href="/industries/" className="btn-outline">View All Industries</Link></Reveal>
           </div>
-          <StackingSteps />
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {industries.map((ind, i) => (
+              <Reveal key={ind.slug} delay={i * 80}>
+                <Link href={industryHref(ind)} className="group block overflow-hidden rounded-xl bg-white shadow-[0_14px_36px_-20px_rgba(4,34,87,.35)]">
+                  <div className="relative h-56 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={`/images/industry-${i + 1}.jpg`} alt={ind.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <span className="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white text-synetra-blue shadow"><Icon name={ind.icon} /></span>
+                  </div>
+                  <div className="p-7">
+                    <h3 className="text-xl font-semibold group-hover:text-synetra-blue">{ind.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-synetra-slate">{ind.summary}</p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-[15px] font-semibold text-synetra-blue">Learn More <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ================= CLIENTS ================= */}
-      <section className="overflow-hidden bg-synetra-paper py-16">
-        <div className="container-site flex flex-col items-center gap-8 lg:flex-row">
-          <p className="shrink-0 text-[12px] font-semibold uppercase tracking-[0.28em] text-synetra-slate">Trusted by teams across industries</p>
-          <div className="relative w-full overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
-            <div className="marquee-track flex w-max gap-14">
+      {/* Why choose us */}
+      <section className="bg-synetra-mist py-20 sm:py-24">
+        <div className="container-site grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:items-center">
+          <Reveal>
+            <Eyebrow>Why Choose Us</Eyebrow>
+            <h2 className="section-title">Why businesses choose Synetra Solutions</h2>
+            <p className="mt-5 text-lg leading-relaxed text-synetra-slate">We combine technical depth with a strong talent network, so you get practical solutions and the right people to deliver them.</p>
+            <Link href="/contact/" className="btn-primary mt-8">Talk to an Expert <ArrowRight className="h-4 w-4" /></Link>
+          </Reveal>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {why.map((w, i) => (
+              <Reveal key={w.title} delay={i * 70} className="rounded-xl bg-white p-7 shadow-sm">
+                <w.icon className="h-9 w-9 text-synetra-blue" strokeWidth={1.6} />
+                <h3 className="mt-4 text-lg font-semibold">{w.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-synetra-slate">{w.text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="py-20 sm:py-24">
+        <div className="container-site">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <Eyebrow>How We Work</Eyebrow>
+            <h2 className="section-title">A simple, proven process</h2>
+          </Reveal>
+          <div className="relative mt-14 grid gap-8 md:grid-cols-4">
+            <span aria-hidden className="absolute left-[12%] right-[12%] top-8 hidden border-t-2 border-dashed border-synetra-line md:block" />
+            {steps.map((s, i) => (
+              <Reveal key={s.title} delay={i * 90} className="relative text-center">
+                <span className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-synetra-blue font-display text-xl font-bold text-white ring-8 ring-white">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-synetra-slate">{s.text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Clients */}
+      <section className="border-y border-synetra-line py-12">
+        <div className="container-site">
+          <p className="text-center text-sm font-semibold uppercase tracking-[0.14em] text-synetra-slate">Trusted by leading organisations</p>
+          <div className="mt-8 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
+            <div className="marquee-track flex w-max gap-6">
               {[...clients, ...clients].map((c, i) => (
-                <span key={i} className="font-display text-2xl text-synetra-navy/30">{c}</span>
+                <span key={i} className="flex h-16 w-44 items-center justify-center rounded-lg border border-synetra-line font-display font-semibold text-synetra-slate/60">{c}</span>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <BigCTA />
+      <CTA />
     </>
   );
 }

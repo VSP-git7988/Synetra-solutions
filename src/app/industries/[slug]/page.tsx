@@ -37,9 +37,10 @@ export default function IndustryDetail({ params }: { params: { slug: string } })
             <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">Speed and control, at the same time.</h2>
             <div className="mt-6 space-y-5 text-lg leading-relaxed text-synetra-slate">{d.intro.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}</div>
           </Reveal>
-          <Reveal delay={120} className="relative mx-auto flex aspect-square w-full max-w-[380px] items-center justify-center rounded-[2rem] bg-synetra-mist">
-            <PixelMosaic pattern={[[1, 1, 0, 2, 3], [1, 2, 2, 0, 3], [0, 2, 3, 3, 0], [2, 0, 3, 1, 1], [3, 3, 0, 1, 0]]} size="h-11 w-11" gap="gap-3" />
-            <span className="absolute -bottom-5 -right-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-synetra-navy text-white shadow-xl"><Icon name={ind.icon} className="h-8 w-8" /></span>
+          <Reveal delay={120} className="relative">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`/images/${ind.slug === 'financial-services' ? 'finance-detail' : 'industry-' + (industries.indexOf(ind) + 1)}.jpg`} alt={ind.title} className="aspect-[4/3] w-full rounded-xl object-cover shadow-lg" />
+            <span className="absolute -bottom-5 -left-3 flex h-16 w-16 items-center justify-center rounded-xl bg-synetra-blue text-white shadow-xl"><Icon name={ind.icon} className="h-8 w-8" /></span>
           </Reveal>
         </div>
       </section>

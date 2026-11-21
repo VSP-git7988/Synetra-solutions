@@ -40,25 +40,26 @@ All text lives in `src/data/`:
 2. Set `hasDetail: true` on that entry.
 3. Run `npm run build`. The page is generated at `/services/<slug>/` and all menus, footer links and cards switch to it automatically.
 
-## Motion & effects
+## Banner slider & images
 
-- `src/components/motion/TideShader.tsx`: the live WebGL "tide" background in the logo's blues. It reacts to the cursor and falls back to a CSS gradient when WebGL isn't available.
-- `SmoothScroll.tsx`: Lenis smooth scrolling, synced with GSAP ScrollTrigger.
-- `Cursor.tsx`: the custom cursor. It shows only on desktop with a mouse.
-- `Preloader.tsx`: the intro where the logo pixels assemble. It plays once per browser session.
-- `Magnetic.tsx`: buttons that are pulled toward the cursor.
-- `src/components/home/`: the scroll-scrubbed manifesto, the pinned horizontal services, the velocity marquee, the hover-preview industry list and the stacking process cards.
+**Get the real photos:** run `npm run images`. It downloads all the free stock photos (Pexels, Unsplash, Pixabay) into `public/images`. Sources are listed in `IMAGE-CREDITS.md`.
 
-All motion switches off automatically for visitors who have "reduce motion" turned on.
+The home page slider and the section images use placeholder graphics in the brand colours. To use real photos, replace these files in `public/images/` and keep the same names:
+
+| File | Used for | Best size |
+|---|---|---|
+| `banner-1.jpg`, `banner-2.jpg`, `banner-3.jpg` | Home slider (3 slides) | 1920×900 |
+| `page-banner.jpg` | Top banner on inner pages, stats strip and CTA band | 1920×520 |
+| `about.jpg` | Home "About" section | 1000×800 |
+| `industry-1.jpg` to `industry-3.jpg` | Industry cards | 900×620 |
+
+Slide text and buttons are in `src/components/HeroSlider.tsx`. Slides auto-advance every 6 seconds and pause on hover.
 
 ## Brand
 
 - Logo files are in `public/brand/`. Favicons are in `public/`.
 - The colours come from the logo and are set in `tailwind.config.ts` under `synetra.*`.
-- The brand motifs are in `src/components/Brand.tsx`:
-  - `SwooshLine` / `SwooshEdge`: the S curve
-  - `PixelMosaic` / `PixelMarker`: the logo's square cluster
-  - `CircuitLines`: the faint network-line texture
+- Fonts: Poppins (headings) and Inter (body).
 
 ## Contact form
 
